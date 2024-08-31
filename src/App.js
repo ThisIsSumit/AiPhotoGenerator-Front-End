@@ -1,25 +1,40 @@
-import logo from './logo.svg';
+
+import React ,{useState} from 'react';
 import './App.css';
+import ImageGenerator from './components/imageGenerator';
+import ChatComponent from './components/chatComponent';
+import RecipeGenerator from './components/recipeGenerator';
+
 
 function App() {
+  const[activeTap,setActiveTab ]=useState('image-generator');
+
+  const handleTabChange=(tab)=>{
+     
+      setActiveTab(tab);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <button 
+       className={activeTap==='image-generator'? 'active': ''}
+       onClick={()=>handleTabChange('image-generator')}> Image generator</button>
+      <button 
+       className={activeTap==='chat'? 'active': ''}
+       onClick={()=>handleTabChange('chat')}>chat</button>
+      <button  
+       className={activeTap==='recipe-generator'? 'active': ''}
+      onClick={()=>handleTabChange('recipe-generator')}>Recipe Generator</button>
+    <div>
+      {activeTap === 'image-generator' && <ImageGenerator/>}
+      {activeTap === 'chat' && <ChatComponent/>}
+      {activeTap === 'recipe-generator' && <RecipeGenerator/>}
+
+       </div>
     </div>
   );
 }
 
 export default App;
+
+
